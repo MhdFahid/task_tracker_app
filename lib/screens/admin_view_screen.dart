@@ -48,8 +48,8 @@ class AdminViewScreen extends StatelessWidget {
   Future<void> updateLocationTask(id) async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(id).update({
-        "taskLatitude": _selectedLatitude.value, 
-        "taskLongitude": _selectedLongitude.value 
+        "taskLatitude": _selectedLatitude.value,
+        "taskLongitude": _selectedLongitude.value
       });
       Get.snackbar('Success', 'Task location updated successfully.');
     } catch (e) {
@@ -97,7 +97,7 @@ class AdminViewScreen extends StatelessWidget {
               gapH(10),
               userModel.taskLatitude != 0.1
                   ? Text(
-                      "Task Status: ${userModel.taskStatus ? 'Done' : 'Pending'}",
+                      "Task Status: ${userModel.taskStatus ? 'Done' : userModel.startButton ? "Running" : 'Pending'}",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -160,7 +160,7 @@ class AdminViewScreen extends StatelessWidget {
                     await updateLocationTask(userModel.id);
                   },
                   text: 'Set Task Location',
-                  active: false, 
+                  active: false,
                 ),
               ),
             ],

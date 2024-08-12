@@ -10,7 +10,6 @@ class UserModel {
   final double taskLongitude;
   final bool startButton;
   final bool taskStatus;
-  final DateTime dateAndTime;
 
   UserModel({
     required this.id,
@@ -22,7 +21,6 @@ class UserModel {
     required this.taskLongitude,
     required this.startButton,
     required this.taskStatus,
-    required this.dateAndTime,
   });
 
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
@@ -36,9 +34,8 @@ class UserModel {
       longitude: data['longitude']?.toDouble() ?? 0.1,
       taskLatitude: data['taskLatitude']?.toDouble() ?? 0.1,
       taskLongitude: data['taskLongitude']?.toDouble() ?? 0.1,
-      startButton: data['startButton'] ?? false,
-      taskStatus: data['taskStatus'] ?? false,
-      dateAndTime: (data['dateAnd'] as Timestamp).toDate(),
+      startButton: data['startButtom'] ?? false,
+      taskStatus: data['task_status'] ?? false,
     );
   }
 
@@ -50,9 +47,8 @@ class UserModel {
       'longitude': longitude,
       'taskLatitude': taskLatitude,
       'taskLongitude': taskLongitude,
-      'startButton': startButton,
-      'taskStatus': taskStatus,
-      'dateAnd': Timestamp.fromDate(dateAndTime),
+      'startButtom': startButton,
+      'task_status': taskStatus,
     };
   }
 }

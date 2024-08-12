@@ -11,11 +11,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- Google Maps API Key -->
-        <!-- <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="API_KEY"/> -->
-
+       
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -43,7 +39,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2"/>
-     
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="API_KEY"/>
     </application>
 
     <!-- Required to query activities that can process text, see:

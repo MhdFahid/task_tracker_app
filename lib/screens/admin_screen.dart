@@ -61,13 +61,17 @@ class AllUsersScreen extends StatelessWidget {
                       ? 'Task Done'
                       : user.taskLatitude == 0.1
                           ? 'No Task'
-                          : 'Task Pending',
+                          : user.startButton
+                              ? 'running'
+                              : 'Task Pending',
                   style: TextStyle(
                       color: user.taskStatus
                           ? Colors.green
                           : user.taskLatitude == 0.1
                               ? Colors.blue
-                              : Colors.red),
+                              : user.startButton
+                                  ? Color.fromARGB(255, 2, 67, 132)
+                                  : Colors.red),
                 ),
                 onTap: () {
                   Get.to(() => AdminViewScreen(

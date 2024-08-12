@@ -81,34 +81,66 @@ class UserScreen extends StatelessWidget {
                                   'Task Status: ',
                                   style: TextStyle(fontSize: 16),
                                 ),
-                                userModel.taskStatus
+                                userModel.taskStatus == true
                                     ? const Text(
                                         'Done',
                                         style: TextStyle(
                                             fontSize: 16, color: Colors.blue),
                                       )
-                                    : const Text(
-                                        'Pending',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                    : userModel.taskStatus == false &&
+                                            userModel.startButton
+                                        ? const Text(
+                                            'Task running...',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Color.fromARGB(
+                                                    255, 173, 160, 159),
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        : const Text(
+                                            'Pending',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                               ],
                             ),
                             const SizedBox(height: 10),
                             SquareButton(
-                              text: userModel.taskStatus
-                                  ? "Completed"
-                                  : 'Start Task',
+                              text: userModel.startButton == false
+                                  ? 'Start Task'
+                                  : userModel.startButton &&
+                                          userModel.taskStatus
+                                      ? "Task Completed"
+                                      : "Complete Task",
                               onTap: () {
-                                if (userModel.taskStatus) {
-                                  _updateStartButtonStatus();
-                                } else if (userModel.taskStatus) {
-                                  _completeTask();
+                                if (!userModel.startButton) {
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser?.uid)
+                                      .update({"startButtom": true});
                                 }
+                                if (userModel.taskStatus == false &&
+                                    userModel.startButton == true) {
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser?.uid)
+                                      .update({"task_status": true});
+                                }
+
+                                // FirebaseFirestore.instance
+                                //     .collection('users')
+                                //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                                //     .update({"startButtom": true});
+                                // FirebaseFirestore.instance
+                                //     .collection('users')
+                                //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                                //     .update({"task_status": true});
                               },
-                              active: false, 
+                              active: false,
                             ),
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.0),

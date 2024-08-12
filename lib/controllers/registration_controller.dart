@@ -29,7 +29,7 @@ class RegistrationController extends GetxController {
         "taskLatitude": taskLatitude,
         "taskLongitude": taskLongitude,
         "startButtom": false,
-        "dateAnd": DateTime.now(),
+        "dateAnd": (DateTime.now()).toString(),
         "id": students.id.toString(),
       });
       Get.to(LoginPage());
