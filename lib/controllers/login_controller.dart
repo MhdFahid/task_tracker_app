@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:task_tracker_app/screens/admin_screen.dart';
@@ -22,7 +23,13 @@ class LoginController extends GetxController {
         print(email);
         Get.offAll(() => const AllUsersScreen());
       } else {
-        await locationController.refreshLocation();
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser?.uid)
+            .update({
+          "latitude": locationController.currentPosition.value!.latitude,
+          "longitude": locationController.currentPosition.value!.longitude,
+        });
         Get.offAll(() => UserScreen());
       }
     } on FirebaseAuthException catch (e) {

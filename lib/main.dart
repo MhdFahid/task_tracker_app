@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:task_tracker_app/screens/login_screen.dart.dart';
-import 'package:task_tracker_app/screens/text.dart';
+import 'package:task_tracker_app/screens/login_screen.dart';
+import 'package:task_tracker_app/screens/register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

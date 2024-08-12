@@ -7,7 +7,7 @@ import 'package:task_tracker_app/models/user_model.dart';
 import 'package:task_tracker_app/suported_widgets/square_button.dart';
 
 import '../controllers/location_controller.dart';
-import 'login_screen.dart.dart';
+import 'login_screen.dart';
 
 class UserScreen extends StatelessWidget {
   UserScreen({super.key});
@@ -114,9 +114,9 @@ class UserScreen extends StatelessWidget {
                                           userModel.taskStatus
                                       ? "Task Completed"
                                       : "Complete Task",
-                              onTap: () {
+                              onTap: () async {
                                 if (!userModel.startButton) {
-                                  FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                       .collection('users')
                                       .doc(FirebaseAuth
                                           .instance.currentUser?.uid)
@@ -124,21 +124,12 @@ class UserScreen extends StatelessWidget {
                                 }
                                 if (userModel.taskStatus == false &&
                                     userModel.startButton == true) {
-                                  FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                       .collection('users')
                                       .doc(FirebaseAuth
                                           .instance.currentUser?.uid)
                                       .update({"task_status": true});
                                 }
-
-                                // FirebaseFirestore.instance
-                                //     .collection('users')
-                                //     .doc(FirebaseAuth.instance.currentUser!.uid)
-                                //     .update({"startButtom": true});
-                                // FirebaseFirestore.instance
-                                //     .collection('users')
-                                //     .doc(FirebaseAuth.instance.currentUser!.uid)
-                                //     .update({"task_status": true});
                               },
                               active: false,
                             ),
@@ -175,19 +166,5 @@ class UserScreen extends StatelessWidget {
         },
       ),
     );
-  }
-
-  void _updateStartButtonStatus() {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"startButtom": true});
-  }
-
-  _completeTask() {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"task_status": true});
   }
 }

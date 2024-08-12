@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:task_tracker_app/screens/admin_view_screen.dart';
-import 'package:task_tracker_app/screens/login_screen.dart.dart';
+import 'package:task_tracker_app/screens/login_screen.dart';
 import '../models/user_model.dart';
 
 class AllUsersScreen extends StatelessWidget {

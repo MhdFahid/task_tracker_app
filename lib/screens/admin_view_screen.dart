@@ -9,7 +9,8 @@ import 'package:task_tracker_app/suported_widgets/square_button.dart';
 
 import '../consts/app_color_constants.dart';
 import '../consts/constants.dart';
-import 'login_screen.dart.dart';
+import 'login_screen.dart';
+import 'user_current_location.dart';
 
 // ignore: must_be_immutable
 class AdminViewScreen extends StatelessWidget {
@@ -97,7 +98,7 @@ class AdminViewScreen extends StatelessWidget {
               gapH(10),
               userModel.taskLatitude != 0.1
                   ? Text(
-                      "Task Status: ${userModel.taskStatus ? 'Done' : userModel.startButton ? "Running" : 'Pending'}",
+                      "Task Status: ${userModel.taskStatus ? 'Done' : userModel.startButton && userModel.taskStatus == false ? "Running" : 'Pending'}",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -105,6 +106,27 @@ class AdminViewScreen extends StatelessWidget {
                       ),
                     )
                   : SizedBox(),
+              gapH(10),
+              InkWell(
+                onTap: () {
+                  Get.to(UserCurrentLocation(
+                    latitude: userModel.latitude,
+                    longitude: userModel.longitude,
+                  ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.lightBlueAccent,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "User Location",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
               gapH(15),
               TextField(
                 controller: _searchController,

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:task_tracker_app/screens/login_screen.dart.dart';
+import 'package:task_tracker_app/screens/login_screen.dart';
 
 class RegistrationController extends GetxController {
   var isLoading = false.obs;
@@ -24,8 +24,8 @@ class RegistrationController extends GetxController {
         "name": name,
         "email": email,
         "task_status": false,
-        "latitudeg": latitude,
-        "log": longitude,
+        "latitude": latitude,
+        "longitude": longitude,
         "taskLatitude": taskLatitude,
         "taskLongitude": taskLongitude,
         "startButtom": false,
@@ -34,7 +34,7 @@ class RegistrationController extends GetxController {
       });
       Get.to(LoginPage());
       Get.showSnackbar(const GetSnackBar(
-        message: 'Registered successfully and logged in.',
+        message: 'Registered successfully',
         duration: Duration(seconds: 2),
       ));
     } on FirebaseAuthException catch (e) {
